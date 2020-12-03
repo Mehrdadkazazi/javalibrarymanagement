@@ -1,8 +1,8 @@
 package dotin.librarymanagement.service.lendingservice;
 
-import dotin.librarymanagement.entity.Book;
-import dotin.librarymanagement.entity.LendingModel;
-import dotin.librarymanagement.entity.Person;
+import dotin.librarymanagement.model.Book;
+import dotin.librarymanagement.model.LendingModel;
+import dotin.librarymanagement.model.Person;
 import dotin.librarymanagement.repository.LendingBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

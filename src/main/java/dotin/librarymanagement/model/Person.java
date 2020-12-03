@@ -1,7 +1,8 @@
-package dotin.librarymanagement.entity;
+package dotin.librarymanagement.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "person")
@@ -22,7 +23,7 @@ public class Person {
     private String family;
 
     @Column(name = "birthDate", columnDefinition = "varchar2(20)")
-    private String birthDate;
+    private Date birthDate;
 
     @Column(name = "role", columnDefinition = "varchar2(20)")
     private String role;
@@ -43,7 +44,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(String cardId, String name, String family, String birthDate, String role, String address, String nationalCode, int activation) {
+    public Person(String cardId, String name, String family, Date birthDate, String role, String address, String nationalCode, int activation) {
         this.cardId = cardId;
         this.name = name;
         this.family = family;
@@ -86,11 +87,11 @@ public class Person {
         this.family = family;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 

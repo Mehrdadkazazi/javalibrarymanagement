@@ -1,4 +1,4 @@
-package dotin.librarymanagement.entity;
+package dotin.librarymanagement.model;
 
 import javax.persistence.*;
 

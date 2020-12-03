@@ -1,7 +1,7 @@
 package dotin.librarymanagement.controller;
 
-import dotin.librarymanagement.entity.Book;
-import dotin.librarymanagement.entity.ResponseObject;
+import dotin.librarymanagement.model.Book;
+import dotin.librarymanagement.model.ResponseObject;
 import dotin.librarymanagement.service.bookservice.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

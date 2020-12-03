@@ -1,6 +1,6 @@
 package dotin.librarymanagement.repository;
 
-import dotin.librarymanagement.entity.Book;
+import dotin.librarymanagement.model.Book;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;

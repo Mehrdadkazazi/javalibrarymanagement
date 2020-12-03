@@ -1,6 +1,6 @@
 package dotin.librarymanagement.service.bookservice;
 
-import dotin.librarymanagement.entity.Book;
+import dotin.librarymanagement.model.Book;
 import dotin.librarymanagement.repository.BookRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

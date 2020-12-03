@@ -1,4 +1,4 @@
-package dotin.librarymanagement.entity;
+package dotin.librarymanagement.model;
 
 public class AuthenticationResponse {
     private final String jwt;

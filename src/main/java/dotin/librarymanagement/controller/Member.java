@@ -1,7 +1,7 @@
 package dotin.librarymanagement.controller;
 
-import dotin.librarymanagement.entity.ResponseObject;
-import dotin.librarymanagement.entity.Person;
+import dotin.librarymanagement.model.ResponseObject;
+import dotin.librarymanagement.model.Person;
 import dotin.librarymanagement.service.personservice.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class Member {
 
     @GetMapping("/salam")
     public String welcome(){
-        return "ana salam....";
+        return "salam welcome....";
     }
 
     @RequestMapping("/save")

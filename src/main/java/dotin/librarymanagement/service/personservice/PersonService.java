@@ -1,6 +1,6 @@
 package dotin.librarymanagement.service.personservice;
 
-import dotin.librarymanagement.entity.Person;
+import dotin.librarymanagement.model.Person;
 import dotin.librarymanagement.repository.PersonRepositoryImpl;
 import dotin.librarymanagement.service.formateditor.Editor;
 import org.springframework.beans.factory.annotation.Autowired;

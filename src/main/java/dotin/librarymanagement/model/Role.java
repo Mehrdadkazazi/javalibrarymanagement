@@ -1,4 +1,4 @@
-//package ir.dotin.educationProject.libraryManagement.model.entity;
+//package ir.dotin.educationProject.libraryManagement.model.model;
 //
 //import javax.persistence.*;
 //import java.util.List;

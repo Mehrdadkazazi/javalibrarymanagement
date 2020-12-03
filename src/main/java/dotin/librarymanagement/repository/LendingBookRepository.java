@@ -1,8 +1,8 @@
 package dotin.librarymanagement.repository;
 
-import dotin.librarymanagement.entity.Book;
-import dotin.librarymanagement.entity.LendingModel;
-import dotin.librarymanagement.entity.Person;
+import dotin.librarymanagement.model.Book;
+import dotin.librarymanagement.model.LendingModel;
+import dotin.librarymanagement.model.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
