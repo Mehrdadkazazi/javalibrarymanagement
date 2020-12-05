@@ -3,26 +3,31 @@ package dotin.librarymanagement.service.personservice;
 import dotin.librarymanagement.model.Person;
 import dotin.librarymanagement.repository.PersonRepositoryImpl;
 import dotin.librarymanagement.service.formateditor.Editor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class PersonService {
 
-    @Autowired
-    PersonRepositoryImpl personRepository;
-    @Autowired
-    Editor editor;
+    private final PersonRepositoryImpl personRepository;
+    private final Editor editor;
 
-    public void savePerson(Person person) {
-        person.setCardId(editor.randomNumberProducer(person.getNationalCode()));
-        personRepository.save(person);
+    public PersonService(PersonRepositoryImpl personRepository, Editor editor) {
+        this.personRepository = personRepository;
+        this.editor = editor;
     }
 
-    public List<Person> finAll(Person person) {
-        return personRepository.findAll(person);
+    @Transactional
+    public Person savePerson(Person person) {
+        person.setCardId(editor.randomNumberProducer(person.getNationalCode()));
+        personRepository.save(person);
+        return person;
+    }
+
+    public List<Person> finAll() {
+        return personRepository.findAll();
     }
 
     public List<Person> findAllByFilter(Person person) {

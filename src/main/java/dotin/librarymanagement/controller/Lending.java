@@ -19,9 +19,9 @@ public class Lending {
     public ResponseObject lendingToUser(@RequestBody LendingModel lendingModel) {
         if (lendingService.insertDocumentData(lendingModel)) {
             lendingService.changeBookStatus(lendingModel.getBookId());
-            return new ResponseObject(true, "lending Done ... ");
+            return new ResponseObject(true, "success","lending Done ... ",null);
         } else {
-            return new ResponseObject(false, "the user get 3 book ...");
+            return new ResponseObject(false,"success" ,"the user get 3 book ..." , null);
         }
     }
 
@@ -33,6 +33,6 @@ public class Lending {
     @RequestMapping("referBook")
     public ResponseObject referBook(@RequestBody Book book) {
         lendingService.changeStatus(book);
-        return new ResponseObject(false, "book referred ...");
+        return new ResponseObject(false, "success" ,"book referred ..." , null);
     }
 }

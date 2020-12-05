@@ -1,10 +1,13 @@
 package dotin.librarymanagement.controller;
 
-import dotin.librarymanagement.model.ResponseObject;
+import dotin.librarymanagement.configuration.PersonConfig;
 import dotin.librarymanagement.model.Person;
+import dotin.librarymanagement.model.ResponseObject;
 import dotin.librarymanagement.service.personservice.PersonService;
+import dotin.librarymanagement.viewmodel.PersonViewModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,51 +15,51 @@ import java.util.List;
 @RestController
 @RequestMapping("/person")
 public class Member {
-    private final PersonService personService;
+
+    private PersonService personService;
+    private PersonConfig personConfig;
 
     @Autowired
-    public Member(PersonService personService) {
+    public Member(PersonService personService, PersonConfig personConfig) {
         this.personService = personService;
+        this.personConfig = personConfig;
     }
 
-    @GetMapping("/salam")
-    public String welcome(){
-        return "salam welcome....";
+    private Logger logger = LoggerFactory.getLogger(Member.class);
+
+    @PostMapping("/save")
+    public ResponseObject save(@RequestBody PersonViewModel personViewModel) {
+        logger.info("start method save() - {}", (new Object[]{this.getClass().getSimpleName()}));
+
+        Person person = personConfig.viewToModel(personViewModel);
+
+        logger.info("end method save() - {}", (new Object[]{this.getClass().getSimpleName()}));
+        return new ResponseObject(false, "success", "", null);
     }
 
-    @RequestMapping("/save")
-    public ResponseObject save(@RequestBody Person person) {
-        personService.savePerson(person);
-        return new ResponseObject(true, "save successful");
-
+    @GetMapping("/findAll")
+    public List<PersonViewModel> finAll() {
+        logger.info("getRequest has been called : ");
+        List<Person> personList = personService.finAll();
+        return personConfig.modelToView(personList);
     }
 
-    @RequestMapping("/findAll")
-    public List<Person> finAll(@RequestBody Person person) {
-        return personService.finAll(person);
+    @PostMapping("/findAllByFilter")
+    public PersonViewModel findAllByFilter(@RequestBody PersonViewModel personViewModel) {
+        Person person = personConfig.viewToModel(personViewModel);
+        List<Person> personList = personService.findAllByFilter(person);
+        return personConfig.modelToView(person);
     }
 
-
-    @RequestMapping("/findAllByFilter")
-    public List<Person> findAllByFilter(@RequestBody Person person) {
-        return personService.findAllByFilter(person);
-    }
-
-    @RequestMapping("/updatePerson")
+    @PostMapping("/update")
     public ResponseObject update(@RequestBody Person person) {
         personService.updatePerson(person);
-        return new ResponseObject(true, "update successful");
+        return new ResponseObject(true, "success", "update successful", null);
     }
 
-    @RequestMapping("/deActivePerson")
+    @DeleteMapping("/deActivePerson{NATIONALCODE}")
     public ResponseObject delete(@RequestBody Person person) {
         personService.deActivePerson(person.getNationalCode());
-        return new ResponseObject(false, "person deactivated");
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseObject exceptionHandler(Exception e) {
-        return new ResponseObject(true, e.getMessage());
+        return new ResponseObject(false, "success", "person deactivated", null);
     }
 }

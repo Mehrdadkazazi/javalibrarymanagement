@@ -22,8 +22,11 @@ public class Person {
     @Column(name = "family", columnDefinition = "varchar2(30)")
     private String family;
 
-    @Column(name = "birthDate", columnDefinition = "varchar2(20)")
+    @Column(name = "birthDate")
     private Date birthDate;
+
+    @Column(name = "registrationDate")
+    private Date registrationDate;
 
     @Column(name = "role", columnDefinition = "varchar2(20)")
     private String role;
@@ -37,22 +40,24 @@ public class Person {
     @Column(name = "activation", columnDefinition = "number")
     private int activation;
 
-    @ManyToMany(fetch =FetchType.EAGER , cascade = CascadeType.ALL)
-    @JoinTable(name = "LendingModel" , joinColumns = {@JoinColumn (name = "user_Id")},inverseJoinColumns = {@JoinColumn(name = "book_Id")})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "LendingModel", joinColumns = {@JoinColumn(name = "user_Id")}, inverseJoinColumns = {@JoinColumn(name = "book_Id")})
     private List<Book> bookList = new ArrayList<>();
 
     public Person() {
     }
 
-    public Person(String cardId, String name, String family, Date birthDate, String role, String address, String nationalCode, int activation) {
+    public Person(String cardId, String name, String family, Date birthDate, Date registrationDate, String role, String address, String nationalCode, int activation, List<Book> bookList) {
         this.cardId = cardId;
         this.name = name;
         this.family = family;
         this.birthDate = birthDate;
+        this.registrationDate = registrationDate;
         this.role = role;
         this.address = address;
         this.nationalCode = nationalCode;
         this.activation = activation;
+        this.bookList = bookList;
     }
 
     public Long getId() {
@@ -93,6 +98,14 @@ public class Person {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public String getRole() {

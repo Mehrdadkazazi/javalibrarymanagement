@@ -2,7 +2,6 @@ package dotin.librarymanagement.repository;
 
 import dotin.librarymanagement.model.Person;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,20 +13,18 @@ public class PersonRepositoryImpl {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Transactional
-    public void save(Person person) {
+    public Person save(Person person) {
         person.setActivation(1);
         entityManager.persist(person);
+        return person;
     }
 
-    @Transactional
-    public List<Person> findAll(Person person) {
+    public List<Person> findAll() {
         Query query = entityManager.createQuery("select entity from Person entity where entity.activation=: ent_activation");
         query.setParameter("ent_activation", 1);
         return query.getResultList();
     }
 
-    @Transactional
     public List<Person> findAllByFilter(Person person) {
         Query query = entityManager.createQuery("select entity from Person entity where entity.activation=: ent_activation and (entity.cardId=:ent_cardId or entity.name=:ent_name or entity.family=:ent_family or entity.birthDate=:ent_birthDate or  entity.address=:ent_address or entity.role=:ent_role or entity.nationalCode=:ent_nationalCode)");
 
@@ -42,7 +39,6 @@ public class PersonRepositoryImpl {
         return query.getResultList();
     }
 
-    @Transactional
     public void updatePerson(Person person) {
         Query query = entityManager.createQuery("update Person entity set entity.cardId=:ent_cardId , entity.name=:ent_name , entity.family=:ent_family , entity.birthDate=:ent_birthDate ,  entity.address=:ent_address , entity.role=:ent_role  where entity.nationalCode=:ent_nationalCode");
         query.setParameter("ent_cardId", person.getCardId());
@@ -55,7 +51,6 @@ public class PersonRepositoryImpl {
         query.executeUpdate();
     }
 
-    @Transactional
     public void deActivePerson(String nationalCode) {
         Query query = entityManager.createQuery("update Person entity set entity.activation=: ent_activation where entity.nationalCode =: ent_nationalCode");
         query.setParameter("ent_activation", 0);

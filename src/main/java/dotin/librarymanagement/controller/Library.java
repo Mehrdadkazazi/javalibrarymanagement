@@ -25,7 +25,7 @@ public class Library {
     @Transactional
     public ResponseObject insertData(@RequestBody Book book) {
         bookService.insertNewBook(book);
-        return new ResponseObject(false, "person saved successfully");
+        return new ResponseObject(false, "success" ,"person saved successfully" , null);
     }
 
     @RequestMapping("/findAll")
@@ -43,13 +43,13 @@ public class Library {
     @RequestMapping("update")
     public ResponseObject update(@RequestBody Book book) {
         bookService.update(book);
-        return new ResponseObject(true, "update done ...");
+        return new ResponseObject(true, "success" ,"update done ..." , null);
     }
 
     @RequestMapping("delete")
     public ResponseObject delete(@RequestBody Book book) {
         bookService.delete(book.getId());
-        return new ResponseObject(false, "book has benn deleted ...");
+        return new ResponseObject(false, "success" ,"book has benn deleted ...",null);
     }
 
     @RequestMapping("/searchFreeBooks")
@@ -62,11 +62,5 @@ public class Library {
             System.out.println(e.getMessage());
         }
         return null;
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseObject exceptionHandler(Exception e) {
-        return new ResponseObject(true, e.getMessage());
     }
 }
