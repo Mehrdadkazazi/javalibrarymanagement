@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 import static jdk.nashorn.internal.objects.NativeDebug.map;
 
 @Component
-public class GenericConfig<T, D> {
+public class GenericConfig<TViewModel, TModel> {
 
     private Logger logger = LoggerFactory.getLogger(GenericConfig.class);
 
-    public D viewToModel(T viewModel, D model) {
+    public TModel viewToModel(TViewModel viewModel, TModel model) {
 
         logger.info("start method mapper viewToModel() - {} : " + viewModel.getClass().getSimpleName());
 
@@ -24,16 +24,18 @@ public class GenericConfig<T, D> {
         return modelMapper.map(viewModel, (Type) model.getClass());
     }
 
-    public T modelToView (D model , T viewModel){
+    public TViewModel modelToView(TModel model, TViewModel viewModel) {
+
+        logger.info("start method mapper viewToModel() - {} : " + viewModel.getClass().getSimpleName());
+
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(model , (Type) viewModel.getClass());
+        return modelMapper.map(model, (Type) viewModel.getClass());
     }
 
-    public List<Object> modelToView (List<D> modelList , Class<D> model){
-        return modelList.stream().map(viewModel -> map(viewModel , model)).collect(Collectors.toList());
-    }
+    public List<Object> modelToView(List<TViewModel> modelList, Class<TViewModel> model) {
 
-//    public List<D> viewToModel(List<T> viewModelList , D model){
-////        return viewModelList.stream().map(this :: viewToModel).collect(Collectors.toList());
-////    }
+        logger.info("start method mapper viewToModel() - {} : " + modelList.getClass().getSimpleName());
+
+        return modelList.stream().map(viewModel -> map(viewModel, model)).collect(Collectors.toList());
+    }
 }

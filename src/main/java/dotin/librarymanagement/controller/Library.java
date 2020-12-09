@@ -1,66 +1,37 @@
 package dotin.librarymanagement.controller;
 
+import dotin.librarymanagement.controller.generic.GenericController;
 import dotin.librarymanagement.model.Book;
-import dotin.librarymanagement.model.ResponseObject;
 import dotin.librarymanagement.service.bookservice.BookService;
+import dotin.librarymanagement.service.generic.GenericService;
+import dotin.librarymanagement.viewmodel.BookViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/book")
-public class Library {
+public class Library extends GenericController<BookViewModel, Book, Long> {
 
-    private final BookService bookService;
+    private BookService bookService;
 
     @Autowired
     public Library(BookService bookService) {
         this.bookService = bookService;
     }
 
-    @RequestMapping("/save")
-    @Transactional
-    public ResponseObject insertData(@RequestBody Book book) {
-        bookService.insertNewBook(book);
-        return new ResponseObject(false, "success" ,"person saved successfully" , null);
+    @Override
+    protected GenericService<Book, Long> getRelatedService() {
+        return bookService;
     }
 
-    @RequestMapping("/findAll")
-    public List<Book> findAll(@RequestBody Book book) {
-        return bookService.findAllBook(book);
-
+    @Override
+    protected Class<BookViewModel> getViewModelClass() {
+        return BookViewModel.class;
     }
 
-    @RequestMapping("/findAllByFilter")
-    public List<Book> findAllByFilter(@RequestBody Book book) {
-        return bookService.findAllByFilter(book);
-
-    }
-
-    @RequestMapping("update")
-    public ResponseObject update(@RequestBody Book book) {
-        bookService.update(book);
-        return new ResponseObject(true, "success" ,"update done ..." , null);
-    }
-
-    @RequestMapping("delete")
-    public ResponseObject delete(@RequestBody Book book) {
-        bookService.delete(book.getId());
-        return new ResponseObject(false, "success" ,"book has benn deleted ...",null);
-    }
-
-    @RequestMapping("/searchFreeBooks")
-    public Book searchLendingBook(@RequestBody Book book) {
-        try {
-
-            return bookService.searchFreeBooks(book);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+    @Override
+    protected Class<Book> getModelClass() {
+        return Book.class;
     }
 }

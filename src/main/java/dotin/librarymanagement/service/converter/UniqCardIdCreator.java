@@ -1,17 +1,14 @@
-package dotin.librarymanagement.service.formateditor;
+package dotin.librarymanagement.service.converter;
 
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
 
 @Service
-public class Editor {
+public class UniqCardIdCreator {
     public String randomNumberProducer(String identifyCode) {
 
         UUID uuid = UUID.randomUUID();
@@ -30,17 +27,6 @@ public class Editor {
             Long result = Long.valueOf(partOfUUID.substring(0, 2) + identifyCode.substring(0, 3) + timeStamp + Long.valueOf(identifyCode.substring(4, 9) + Long.valueOf(partOfUUID.substring(3, 5) + identifyCode.substring(10, 12))));
             return String.valueOf(result);
         } else return String.valueOf(0);
-    }
-
-    public static Date converter(String birthDate) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        Date date;
-        try {
-          return date = dateFormat.parse(birthDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     private static String idBuilder(String uuid) {

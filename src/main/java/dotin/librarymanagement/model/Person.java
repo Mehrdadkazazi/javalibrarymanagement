@@ -26,7 +26,7 @@ public class Person {
     private Date birthDate;
 
     @Column(name = "registrationDate")
-    private Date registrationDate;
+    private Long registrationDate;
 
     @Column(name = "role", columnDefinition = "varchar2(20)")
     private String role;
@@ -47,7 +47,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(String cardId, String name, String family, Date birthDate, Date registrationDate, String role, String address, String nationalCode, int activation, List<Book> bookList) {
+    public Person(String cardId, String name, String family, Date birthDate, Long registrationDate, String role, String address, String nationalCode, int activation, List<Book> bookList) {
         this.cardId = cardId;
         this.name = name;
         this.family = family;
@@ -100,11 +100,11 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public Date getRegistrationDate() {
+    public Long getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(Long registrationDate) {
         this.registrationDate = registrationDate;
     }
 
