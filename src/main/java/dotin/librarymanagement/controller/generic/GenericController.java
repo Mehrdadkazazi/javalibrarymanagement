@@ -76,7 +76,7 @@ public abstract class GenericController<TViewModel, TModel, ID extends Serializa
 
         List modelList = this.getRelatedService().findAll(model);
 
-        TViewModel responseViewModel = modelMapper.map(modelList.get(0), (Type) this.modelClass);
+        TViewModel responseViewModel = modelMapper.map(modelList.size() > 0 ? modelList.get(0) : 0, (Type) this.modelClass);
 
         return new ResponseObject(false, "200", "success", Collections.singletonList(responseViewModel));
     }

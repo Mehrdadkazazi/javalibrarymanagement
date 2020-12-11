@@ -1,4 +1,4 @@
-package dotin.librarymanagement.repository.share;
+package dotin.librarymanagement.repository.generic;
 
 import org.springframework.stereotype.Component;
 
@@ -15,6 +15,5 @@ public interface GenericDao<TModel, ID> {
     TModel findById(ID id);
 
     boolean delete(TModel model);
-
 
 }

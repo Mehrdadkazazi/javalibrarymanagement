@@ -1,7 +1,7 @@
 package dotin.librarymanagement.repository.person;
 
 import dotin.librarymanagement.model.Person;
-import dotin.librarymanagement.repository.share.GenericDaoImpl;
+import dotin.librarymanagement.repository.generic.GenericDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

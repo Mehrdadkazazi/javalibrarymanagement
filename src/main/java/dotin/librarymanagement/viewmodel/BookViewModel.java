@@ -16,6 +16,8 @@ public class BookViewModel extends ResponseObject {
 
     private String status;
 
+    private Long activation;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +64,13 @@ public class BookViewModel extends ResponseObject {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getActivation() {
+        return activation;
+    }
+
+    public void setActivation(Long activation) {
+        this.activation = activation;
     }
 }

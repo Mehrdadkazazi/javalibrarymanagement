@@ -1,6 +1,6 @@
 package dotin.librarymanagement.service.generic;
 
-import dotin.librarymanagement.repository.share.GenericDao;
+import dotin.librarymanagement.repository.generic.GenericDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

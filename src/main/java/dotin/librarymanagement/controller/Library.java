@@ -22,7 +22,7 @@ public class Library extends GenericController<BookViewModel, Book, Long> {
 
     @Override
     protected GenericService<Book, Long> getRelatedService() {
-        return bookService;
+        return this.bookService;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package dotin.librarymanagement.repository.share;
+package dotin.librarymanagement.repository.generic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
