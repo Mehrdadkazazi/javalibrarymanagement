@@ -4,7 +4,6 @@ import dotin.librarymanagement.model.Book;
 import dotin.librarymanagement.model.LendingModel;
 import dotin.librarymanagement.model.Person;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +14,6 @@ public class LendingBookRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Transactional
     public void insertData(LendingModel lendingModel) {
         try {
             entityManager.persist(lendingModel);
@@ -24,7 +22,6 @@ public class LendingBookRepository {
         }
     }
 
-    @Transactional
     public void updateBookStatus(Long id) {
         Query query = entityManager.createQuery("update Book entity set entity.status=:ent_status where entity.id=:ent_id");
         query.setParameter("ent_status", 1L);
@@ -37,14 +34,12 @@ public class LendingBookRepository {
         }
     }
 
-    @Transactional
     public Person searchPersonLendingStatus(Long userId) {
         Query query = entityManager.createQuery("select entity from Person entity where entity.id=:ent_id");
         query.setParameter("ent_id", userId);
         return (Person) query.getSingleResult();
     }
 
-    @Transactional
     public Book findSavedBook(Book book) {
         Query query = entityManager.createQuery("select entity from Book entity where entity.status=:ent_status and (entity.id=:ent_Id or entity.bookName=:ent_BookName or entity.isbn=:ent_Isbn or entity.authorName=:ent_AuthorName or entity.classification=:ent_Classification)");
         query.setParameter("ent_status", 1L);
@@ -56,7 +51,6 @@ public class LendingBookRepository {
         return (Book) query.getSingleResult();
     }
 
-    @Transactional
     public void changeStatus(Book book) {
         Query query = entityManager.createQuery("update Book entity set entity.status=:ent_status where entity.id=:ent_id");
         query.setParameter("ent_status", 0L);

@@ -6,13 +6,19 @@ import dotin.librarymanagement.model.Person;
 import dotin.librarymanagement.repository.LendingBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LendingService {
 
-    @Autowired
     LendingBookRepository lendingBookRepository;
 
+    @Autowired
+    public LendingService(LendingBookRepository lendingBookRepository) {
+        this.lendingBookRepository = lendingBookRepository;
+    }
+
+    @Transactional
     public boolean insertDocumentData(LendingModel lendingModel) {
         if (checkPersonLendingStatus(lendingModel.getUserId())) {
             lendingBookRepository.insertData(lendingModel);
@@ -22,6 +28,7 @@ public class LendingService {
         }
     }
 
+    @Transactional
     public void changeBookStatus(Long bookId) {
         lendingBookRepository.updateBookStatus(bookId);
     }
@@ -39,6 +46,7 @@ public class LendingService {
         return lendingBookRepository.findSavedBook(book);
     }
 
+    @Transactional
     public void changeStatus(Book book) {
         lendingBookRepository.changeStatus(book);
     }
