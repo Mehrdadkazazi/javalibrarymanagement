@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtil {
-    public static Date converter(String birthDate) {
+    public Date converter(String birthDate) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         Date date;
         try {

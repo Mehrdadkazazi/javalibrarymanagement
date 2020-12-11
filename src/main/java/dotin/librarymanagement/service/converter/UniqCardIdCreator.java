@@ -29,7 +29,7 @@ public class UniqCardIdCreator {
         } else return String.valueOf(0);
     }
 
-    private static String idBuilder(String uuid) {
+    private String idBuilder(String uuid) {
         StringBuilder numbers = new StringBuilder();
         for (int i = 0; i < uuid.length(); i++) {
             char values = uuid.charAt(i);

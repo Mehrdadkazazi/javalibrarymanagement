@@ -24,8 +24,12 @@ public class PersonDaoImpl extends GenericDaoImpl<Person, Long> implements Perso
 
     @Override
     public List<Person> findAll(Person person) {
-        Query query = entityManager.createQuery("select entity from Person entity where entity.activation =: activation");
-        query.setParameter("activation" , 1);
+        Query query = entityManager.createQuery("select entity from Person entity where entity.activation =: activation and (entity.name=:name or entity.family=:family or entity.cardId=:cardId or entity.nationalCode=:nationalCode)");
+        query.setParameter("activation", 1);
+        query.setParameter("name", person.getName());
+        query.setParameter("family", person.getFamily());
+        query.setParameter("cardId", person.getCardId());
+        query.setParameter("nationalCode", person.getNationalCode());
         return query.getResultList();
     }
 
