@@ -27,6 +27,9 @@ public class Book {
     @Column(columnDefinition = "number")
     private Long status;
 
+    @Column(columnDefinition = "number")
+    private Long activation;
+
     @ManyToMany(mappedBy = "bookList" , cascade = CascadeType.ALL)
     private List<Person> personList= new ArrayList<>();
 
@@ -38,12 +41,13 @@ public class Book {
     public Book() {
     }
 
-    public Book(String bookName, String isbn, String authorName, String classification, Long status) {
+    public Book(String bookName, String isbn, String authorName, String classification, Long status , Long activation) {
         this.bookName = bookName;
         this.isbn = isbn;
         this.authorName = authorName;
         this.classification = classification;
         this.status = status;
+        this.activation = activation;
     }
 
     public Long getId() {
@@ -100,5 +104,13 @@ public class Book {
 
     public void setPersonList(List<Person> personList) {
         this.personList = personList;
+    }
+
+    public Long getActivation() {
+        return activation;
+    }
+
+    public void setActivation(Long activation) {
+        this.activation = activation;
     }
 }
