@@ -1,6 +1,6 @@
 package dotin.librarymanagement.viewmodel;
 
-import dotin.librarymanagement.model.ResponseObject;
+import dotin.librarymanagement.general.model.ResponseObject;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;

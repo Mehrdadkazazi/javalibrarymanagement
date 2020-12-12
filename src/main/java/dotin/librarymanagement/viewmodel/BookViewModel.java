@@ -1,6 +1,6 @@
 package dotin.librarymanagement.viewmodel;
 
-import dotin.librarymanagement.model.ResponseObject;
+import dotin.librarymanagement.general.model.ResponseObject;
 
 public class BookViewModel extends ResponseObject {
 
