@@ -28,10 +28,10 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, Long> implemen
         return this.personDao;
     }
 
-    /*@Override
+    @Override
     public List<Person> findAll(Person person) {
         return personDao.findAll(person);
-    }*/
+    }
 
     @Transactional
     @Override

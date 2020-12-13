@@ -41,7 +41,7 @@ public abstract class GenericServiceImpl<TModel, ID extends Serializable> implem
 
     @Override
     public List<TModel> findAll(TModel model) {
-        return this.getRelatedDao().findAll(model);
+        return null;
     }
 
     public TModel findById(ID id) {

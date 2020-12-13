@@ -1,9 +1,9 @@
 package dotin.librarymanagement.library.controller;
 
 import dotin.librarymanagement.general.controller.GenericController;
+import dotin.librarymanagement.general.service.GenericService;
 import dotin.librarymanagement.library.model.Book;
 import dotin.librarymanagement.library.service.BookService;
-import dotin.librarymanagement.general.service.GenericService;
 import dotin.librarymanagement.viewmodel.BookViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
