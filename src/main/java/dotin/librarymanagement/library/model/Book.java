@@ -4,7 +4,9 @@ import dotin.librarymanagement.user.model.Person;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "book")
 @Entity(name = "Book")
@@ -33,7 +35,7 @@ public class Book {
     private Long activation;
 
     @ManyToMany(mappedBy = "bookList" , cascade = CascadeType.ALL)
-    private List<Person> personList= new ArrayList<>();
+    private Set<Person> personList= new HashSet<>();
 
     public void addPerson(Person person){
         personList.add(person);
@@ -100,11 +102,11 @@ public class Book {
         this.status = status;
     }
 
-    public List<Person> getPersonList() {
+    public Set<Person> getPersonList() {
         return personList;
     }
 
-    public void setPersonList(List<Person> personList) {
+    public void setPersonList(Set<Person> personList) {
         this.personList = personList;
     }
 

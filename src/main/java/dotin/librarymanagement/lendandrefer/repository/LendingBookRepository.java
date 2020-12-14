@@ -1,9 +1,10 @@
 package dotin.librarymanagement.lendandrefer.repository;
 
-import dotin.librarymanagement.library.model.Book;
 import dotin.librarymanagement.lendandrefer.model.LendingModel;
+import dotin.librarymanagement.library.model.Book;
 import dotin.librarymanagement.user.model.Person;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -61,10 +62,16 @@ public class LendingBookRepository {
             System.out.println(e.getMessage());
         }
     }
+    @Transactional
+    public void deleteDataFromDocument(Book book) {
+        Book bookResponse = entityManager.find(Book.class, book.getId());
 
-    public void deleteDataFromDocument(Book book , LendingModel lendingModel){
-        Query query = entityManager.createQuery("delete entity LendingModel entity where entity.bookId=:bookId");
-        query.setParameter("bookId" , book.getId());
-        query.executeUpdate();
+        if (bookResponse != null) {
+            book.getPersonList().forEach(person -> {
+                person.getBookList().remove(bookResponse);
+            });
+
+            entityManager.remove(bookResponse);
+        }
     }
 }

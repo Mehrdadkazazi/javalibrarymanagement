@@ -3,9 +3,7 @@ package dotin.librarymanagement.user.model;
 import dotin.librarymanagement.library.model.Book;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Table(name = "person")
 @Entity(name = "Person")
@@ -44,12 +42,12 @@ public class Person {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "LendingModel", joinColumns = {@JoinColumn(name = "user_Id")}, inverseJoinColumns = {@JoinColumn(name = "book_Id")})
-    private List<Book> bookList = new ArrayList<>();
+    private Set<Book> bookList = new HashSet<>();
 
     public Person() {
     }
 
-    public Person(String cardId, String name, String family, Date birthDate, Long registrationDate, String role, String address, String nationalCode, int activation, List<Book> bookList) {
+    public Person(String cardId, String name, String family, Date birthDate, Long registrationDate, String role, String address, String nationalCode, int activation, Set<Book> bookList) {
         this.cardId = cardId;
         this.name = name;
         this.family = family;
@@ -142,11 +140,11 @@ public class Person {
         this.activation = activation;
     }
 
-    public List<Book> getBookList() {
+    public Set<Book> getBookList() {
         return bookList;
     }
 
-    public void setBookList(List<Book> bookList) {
+    public void setBookList(Set<Book> bookList) {
         this.bookList = bookList;
     }
 }

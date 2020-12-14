@@ -45,5 +45,10 @@ public class BookServiceImpl extends GenericServiceImpl<Book, Long> implements B
         singleResultBook.setClassification(book.getClassification());
         return super.update(singleResultBook);
     }
+
+    @Override
+    public List<Book> findFreeBook(Book book) {
+        return bookDao.findFreeBook(book);
+    }
 }
 

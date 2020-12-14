@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class LendingService {
+public class LibraryManagementServiceImpl implements LibraryManagementService{
 
     private LendingBookRepository lendingBookRepository;
 
     @Autowired
-    public LendingService(LendingBookRepository lendingBookRepository) {
+    public LibraryManagementServiceImpl(LendingBookRepository lendingBookRepository) {
         this.lendingBookRepository = lendingBookRepository;
     }
 
@@ -63,6 +63,6 @@ public class LendingService {
     }
 
     private void deleteDataFromDocument(Book book, LendingModel lendingModel) {
-        lendingBookRepository.deleteDataFromDocument(book, lendingModel);
+        lendingBookRepository.deleteDataFromDocument(book);
     }
 }
