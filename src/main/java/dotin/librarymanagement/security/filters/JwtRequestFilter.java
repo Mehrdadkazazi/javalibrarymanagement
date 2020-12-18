@@ -1,6 +1,6 @@
 package dotin.librarymanagement.security.filters;
 
-import dotin.librarymanagement.general.service.MyUserDetailsService;
+import dotin.librarymanagement.security.service.MyUserDetailsService;
 import dotin.librarymanagement.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,7 +32,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String authorizationHeader = httpServletRequest.getHeader("Authorization");
+         String authorizationHeader = httpServletRequest.getHeader("Authorization");
 
         String userName = null;
         String jwt = null;

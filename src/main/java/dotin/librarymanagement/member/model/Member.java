@@ -1,16 +1,16 @@
-package dotin.librarymanagement.user.model;
+package dotin.librarymanagement.member.model;
 
 import dotin.librarymanagement.library.model.Book;
 
 import javax.persistence.*;
 import java.util.*;
 
-@Table(name = "person")
-@Entity(name = "Person")
-public class Person {
+@Table(name = "member")
+@Entity(name = "Member")
+public class Member {
     @Id
-    @SequenceGenerator(name = "person_seq", sequenceName = "person_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "person_seq")
+    @SequenceGenerator(name = "member_seq", sequenceName = "member_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "member_seq")
     private Long id;
 
     @Column(name = "cardId", columnDefinition = "varchar2(50)", unique = true)
@@ -41,13 +41,21 @@ public class Person {
     private int activation;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "LendingModel", joinColumns = {@JoinColumn(name = "user_Id")}, inverseJoinColumns = {@JoinColumn(name = "book_Id")})
+    @JoinTable(name = "LendingModel", joinColumns = {@JoinColumn(name = "member_Id")}, inverseJoinColumns = {@JoinColumn(name = "book_Id")})
     private Set<Book> bookList = new HashSet<>();
 
-    public Person() {
+    public Set<Book> getBookList() {
+        return bookList;
     }
 
-    public Person(String cardId, String name, String family, Date birthDate, Long registrationDate, String role, String address, String nationalCode, int activation, Set<Book> bookList) {
+    public void setBookList(Set<Book> bookList) {
+        this.bookList = bookList;
+    }
+
+    public Member() {
+    }
+
+    public Member(String cardId, String name, String family, Date birthDate, Long registrationDate, String role, String address, String nationalCode, int activation) {
         this.cardId = cardId;
         this.name = name;
         this.family = family;
@@ -57,7 +65,6 @@ public class Person {
         this.address = address;
         this.nationalCode = nationalCode;
         this.activation = activation;
-        this.bookList = bookList;
     }
 
     public Long getId() {
@@ -140,12 +147,7 @@ public class Person {
         this.activation = activation;
     }
 
-    public Set<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(Set<Book> bookList) {
-        this.bookList = bookList;
-    }
 }
+
+
 

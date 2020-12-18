@@ -1,4 +1,4 @@
-package dotin.librarymanagement.general.service;
+package dotin.librarymanagement.security.service;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +13,12 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return new User("mehrdad" , "admin" , new ArrayList<>());
+
+        // .... data base query ....
+        //
+        //
+        //
+
+        return new User("admin", "admin", new ArrayList<>());
     }
 }

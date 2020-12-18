@@ -1,12 +1,10 @@
 package dotin.librarymanagement.library.model;
 
-import dotin.librarymanagement.user.model.Person;
+import dotin.librarymanagement.member.model.Member;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "book")
 @Entity(name = "Book")
@@ -34,18 +32,26 @@ public class Book {
     @Column(columnDefinition = "number")
     private Long activation;
 
-    @ManyToMany(mappedBy = "bookList" , cascade = CascadeType.ALL)
-    private Set<Person> personList= new HashSet<>();
+    @ManyToMany(mappedBy = "bookList", cascade = CascadeType.PERSIST)
+    private List<Member> memberList = new ArrayList<>();
 
-    public void addPerson(Person person){
-        personList.add(person);
-        person.getBookList().add(this);
+    public void addMember(Member member) {
+        memberList.add(member);
+        member.getBookList().add(this);
+    }
+
+    public List<Member> getMemberList() {
+        return memberList;
+    }
+
+    public void setMemberList(List<Member> memberList) {
+        this.memberList = memberList;
     }
 
     public Book() {
     }
 
-    public Book(String bookName, String isbn, String authorName, String classification, Long status , Long activation) {
+    public Book(String bookName, String isbn, String authorName, String classification, Long status, Long activation) {
         this.bookName = bookName;
         this.isbn = isbn;
         this.authorName = authorName;
@@ -100,14 +106,6 @@ public class Book {
 
     public void setStatus(Long status) {
         this.status = status;
-    }
-
-    public Set<Person> getPersonList() {
-        return personList;
-    }
-
-    public void setPersonList(Set<Person> personList) {
-        this.personList = personList;
     }
 
     public Long getActivation() {

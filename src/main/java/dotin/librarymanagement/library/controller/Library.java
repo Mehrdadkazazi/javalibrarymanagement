@@ -61,8 +61,4 @@ public class Library extends GenericController<BookViewModel, Book, Long> {
         return new ResponseObject(false, "200", "success", Collections.singletonList(responseViewModel));
     }
 
-    @RequestMapping({"hello"})
-    public String hello() {
-        return "Hello World";
-    }
 }

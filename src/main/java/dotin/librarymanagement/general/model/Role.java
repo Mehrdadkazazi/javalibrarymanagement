@@ -1,51 +1,56 @@
-//package ir.dotin.educationProject.libraryManagement.model.model;
-//
-//import javax.persistence.*;
-//import java.util.List;
-//import java.util.Set;
-//
-//@Entity(name = "Role")
-//@Table(name = "role")
-//public class Role {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
-//
-//    @Column(columnDefinition = "varchar2(20)")
-//    private String role;
-//    @ManyToMany(mappedBy = "roles")
-//    private List<Person> persons;
-//
-//    public Role() {
-//    }
-//
-//    public Role(Long id, String name, Set<User> users) {
-//        this.id = id;
-//        this.name = name;
-//        this.users = users;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
-//}
+package dotin.librarymanagement.general.model;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Table(name = "role")
+@Entity(name = "Role")
+public class Role {
+    @Id
+    @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "role_seq")
+    private Long id;
+
+    @Column(columnDefinition = "varchar2(20)")
+    private String role;
+
+    @ManyToMany(mappedBy = "roleList", cascade = CascadeType.PERSIST)
+    private List<Person> personList = new ArrayList<>();
+
+    public void addPerson(Person person) {
+        personList.add(person);
+        person.getRoleList().add(this);
+    }
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
+    }
+
+    public Role() {
+    }
+
+    public Role(String role) {
+        this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+}

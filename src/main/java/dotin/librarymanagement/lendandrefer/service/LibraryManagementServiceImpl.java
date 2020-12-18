@@ -2,11 +2,13 @@ package dotin.librarymanagement.lendandrefer.service;
 
 import dotin.librarymanagement.library.model.Book;
 import dotin.librarymanagement.lendandrefer.model.LendingModel;
-import dotin.librarymanagement.user.model.Person;
+import dotin.librarymanagement.member.model.Member;
 import dotin.librarymanagement.lendandrefer.repository.LendingBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class LibraryManagementServiceImpl implements LibraryManagementService{
@@ -20,7 +22,7 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
 
     @Transactional
     public boolean insertDocumentData(LendingModel lendingModel) {
-        if (checkPersonLendingStatus(lendingModel.getUserId())) {
+        if (checkPersonLendingStatus(lendingModel.getMemberId())) {
             lendingBookRepository.insertData(lendingModel);
             return true;
         } else {
@@ -34,15 +36,15 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
     }
 
     public boolean checkPersonLendingStatus(Long userId) {
-        Person person = lendingBookRepository.searchPersonLendingStatus(userId);
-        if (person.getBookList().size() < 3) {
+        Member member = lendingBookRepository.searchPersonLendingStatus(userId);
+        if (member.getBookList().size() < 3) {
             return true;
         } else {
             return false;
         }
     }
 
-    public Book findSavedBook(Book book) {
+    public List<Book> findSavedBook(Book book) {
         return lendingBookRepository.findSavedBook(book);
     }
 
@@ -52,7 +54,7 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
 
         changeStatus(book);
 
-        deleteDataFromDocument(book, lendingModel);
+        //deleteDataFromDocument(book, lendingModel);
 
         return true;
 
