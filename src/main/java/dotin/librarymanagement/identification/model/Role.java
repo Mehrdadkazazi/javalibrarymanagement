@@ -1,4 +1,4 @@
-package dotin.librarymanagement.general.model;
+package dotin.librarymanagement.identification.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

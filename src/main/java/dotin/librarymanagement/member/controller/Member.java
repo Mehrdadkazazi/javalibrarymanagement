@@ -3,14 +3,14 @@ package dotin.librarymanagement.member.controller;
 import dotin.librarymanagement.general.controller.GenericController;
 import dotin.librarymanagement.general.service.GenericService;
 import dotin.librarymanagement.member.service.MemberService;
-import dotin.librarymanagement.viewmodel.PersonViewModel;
+import dotin.librarymanagement.viewmodel.MemberViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/member")
-public class Member extends GenericController<PersonViewModel, dotin.librarymanagement.member.model.Member, Long> {
+public class Member extends GenericController<MemberViewModel, dotin.librarymanagement.member.model.Member, Long> {
 
     private MemberService memberService;
 
@@ -25,8 +25,8 @@ public class Member extends GenericController<PersonViewModel, dotin.librarymana
     }
 
     @Override
-    protected Class<PersonViewModel> getViewModelClass() {
-        return PersonViewModel.class;
+    protected Class<MemberViewModel> getViewModelClass() {
+        return MemberViewModel.class;
     }
 
     @Override

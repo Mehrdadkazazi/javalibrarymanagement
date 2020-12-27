@@ -1,4 +1,4 @@
-package dotin.librarymanagement.general.model;
+package dotin.librarymanagement.identification.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "person_seq")
     private Long id;
 
-    @Column(columnDefinition = "varchar2(20)")
+    @Column(columnDefinition = "varchar2(20)" , unique = true)
     private String username;
 
     @Column(columnDefinition = "varchar2(50)")

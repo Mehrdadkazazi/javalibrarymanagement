@@ -2,6 +2,7 @@ package dotin.librarymanagement.general.reporitory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@Repository
+@NoRepositoryBean
 public abstract class GenericDaoImpl<TModel, ID> implements GenericDao<TModel, ID> {
     @PersistenceContext
     EntityManager entityManager;
@@ -52,7 +53,7 @@ public abstract class GenericDaoImpl<TModel, ID> implements GenericDao<TModel, I
     public List<TModel> findAllObjects(Class<? extends TModel> model) {
         logger.info("start delete query() - {} :", (new Object[]{this.getClass().getSimpleName()}));
 
-        Query query= entityManager.createQuery("select entity from" + model.getAnnotation(Entity.class).name() + "entity");
+        Query query= entityManager.createQuery("select entity from " + model.getAnnotation(Entity.class).name() + " entity");
         return query.getResultList();
     }
 

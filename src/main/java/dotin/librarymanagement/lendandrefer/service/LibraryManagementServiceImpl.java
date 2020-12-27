@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,7 +38,15 @@ public class LibraryManagementServiceImpl implements LibraryManagementService{
 
     public boolean checkPersonLendingStatus(Long userId) {
         Member member = lendingBookRepository.searchPersonLendingStatus(userId);
-        if (member.getBookList().size() < 3) {
+        List<Book> booksAssigned = new ArrayList<>();
+
+        for (Book bookList : member.getBookList()){
+            if (bookList.getStatus()==1){
+                booksAssigned.add(bookList);
+            }
+        }
+
+        if (booksAssigned.size() < 3) {
             return true;
         } else {
             return false;

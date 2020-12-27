@@ -34,7 +34,7 @@ public abstract class GenericController<TViewModel, TModel, ID extends Serializa
     protected Class<TModel> modelClass = this.getModelClass();
 
     public GenericController() {
-
+        //modelMapper.getConfiguration().setImplicitMappingEnabled(false);
     }
 
     @PostMapping("/save")
